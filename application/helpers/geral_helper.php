@@ -106,3 +106,24 @@ function validarDadosConsulta($valor, $tipo)
     }
     return array('codigoHelper' => 0, 'msg' => 'Validação Correta!');
 }
+
+function compararDataHora($valorInicial, $valorFinal, $tipo ){
+    $valorInicial = strtotime($valorInicial);
+    $valorFinal = strtotime($valorFinal);
+
+    if ($valorInicial != '' && $valorFinal != '' ){
+        if ($valorInicial > $valorFinal){
+            switch($tipo){
+                case 'hora':
+                    return array('codigoHelper' => 13, 'msg' => 'Hora final menor que a hora inicial');
+                    break;
+                case 'data':
+                    return array('codigoHelper' => 14, 'msg' => 'Data final menor que a data inicial');
+                    break;
+                    default:
+                    return array('codigoHelper' => 97, 'msg' => 'Tipo de verificação não definida');
+            }
+        }
+    }
+    return array('codigoHelper' => 0, 'msg' => 'Validação correta!');
+}

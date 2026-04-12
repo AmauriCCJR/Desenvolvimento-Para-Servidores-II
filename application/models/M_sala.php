@@ -8,8 +8,6 @@ class M_sala extends CI_Model
 
     public function inserir($codigo, $descricao, $andar, $capacidade)
     {
-
-
         $retornoConsulta = $this->consultaSala($codigo);
 
         try {
@@ -205,7 +203,6 @@ class M_sala extends CI_Model
                 'msg' => 'Atenção: O seguinte erro aconteceu -> ' . $e->getMessage()
             );
         }
-
         return $dados;
     }
 };

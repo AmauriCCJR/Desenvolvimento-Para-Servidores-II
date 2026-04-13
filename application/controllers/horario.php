@@ -295,7 +295,7 @@ Validação dos tipos de retornos nas validações (Código de erro)
                 if (trim($resultado->descricao) == '' && trim($resultado->horaInicial) == '' && trim($resultado->horaFinal) == '') {
                     $erros[] = ['codigo' => 12, 'msg' => 'Pelo menos um campo deve ser informado para atualização.'];
                 } else {
-                    $retornoCodigo = validarDados($resultado->codigo, 'int', true);
+                    $retornoCodigo = validarDadosConsulta($resultado->codigo, 'int', true);
                     $retornoDescricao = validarDadosConsulta($resultado->descricao, 'string');
                     $retornoHoraInicial = validarDadosConsulta($resultado->horaInicial, 'hora');
                     $retornoHoraFinal = validarDadosConsulta($resultado->horaFinal, 'hora');

@@ -212,7 +212,7 @@ Validação dos tipos de retornos nas validações (Código de erro)
 
             // ====== VERIFICAR ESTRUTURA DO JSON ======
             if (verificarParametro($resultado, $lista) != 1) {
-                $erros[] = ['codigo' => 99, 'msg' => "Campos inexistentes! ou incorretos!"];
+                $erros[] = ['codigo' => 99, 'msg' => "Campos inexistentes ou incorretos!!"];
             } else {
                 // ====== VALIDAR FILTROS (OPCIONAIS) ======
                 // Valida os dados, mas sem exigir que sejam preenchidos

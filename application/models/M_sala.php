@@ -38,6 +38,10 @@ class M_sala extends CI_Model
         return $dados;
     }
 
+    
+
+
+
 
     private function consultaSala($codigo)
     {

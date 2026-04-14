@@ -14,12 +14,13 @@ Validação dos tipos de retornos nas validações (Código de erro)
 98 - Método auxiliar de consulta que não trouxe dados
 */
 
-    public function inserir($descricao, $horaInicial, $horaFinal)
+    public function inserir($codigo, $descricao, $horaInicial, $horaFinal)
     {
         try {
-            $retornoConsulta = $this->consultarHorario('', $horaInicial, $horaFinal);
+            $retornoConsulta = $this->consultarHorario($codigo, $horaInicial, $horaFinal);
             if ($retornoConsulta['codigo'] != 9 && $retornoConsulta['codigo'] != 10) {
-                $this->db->query("insert into tbl_horario(descricao, hora_ini, hora_fim) values ('$descricao', '$horaInicial', '$horaFinal')");
+
+                $this->db->query("insert into tbl_horario(codigo,descricao, hora_ini, hora_fim) values ('$codigo', '$descricao', '$horaInicial', '$horaFinal')");
                 if ($this->db->affected_rows() > 0) {
                     $dados = array(
                         'codigo' => 1,
@@ -91,21 +92,22 @@ Validação dos tipos de retornos nas validações (Código de erro)
     public function consultar($codigo, $descricao, $horaInicial, $horaFinal)
     {
         try {
-            $sql = "select * from tbl_horario where estatus = ''";
+            $sql = "select * from tbl_horario where estatus = '' ";
+
             if (trim($codigo) != '') {
-                $sql .= " and codigo = $codigo";
+                $sql = $sql. " and codigo = $codigo ";
             }
 
             if (trim($descricao) != '') {
-                $sql .= " and descricao like '%$descricao%'";
+                $sql = $sql. " and descricao like '%$descricao%' ";
             }
 
             if (trim($horaInicial) != '') {
-                $sql .= " and hora_ini = '$horaInicial'";
+                $sql = $sql. " and hora_ini = '$horaInicial' ";
             }
 
             if (trim($horaFinal) != '') {
-                $sql .= " and hora_fim = '$horaFinal'";
+                $sql = $sql. " and hora_fim = '$horaFinal' ";
             }
 
             $sql = $sql . " order by codigo";
@@ -130,13 +132,14 @@ Validação dos tipos de retornos nas validações (Código de erro)
                 'msg' => 'O seguinte erro aconteceu: ' . $e->getMessage()
             );
         }
+        return $dados;
     }
 
     public function alterar($codigo, $descricao, $horaInicial, $horaFinal)
     {
         try {
             $retornoConsulta = $this->consultar($codigo, '', '', '');
-            if ($retornoConsulta['codigo'] == 10) {
+            if ($retornoConsulta['codigo'] == 1) {
                 $query = "update tbl_horario set ";
 
 
@@ -150,7 +153,7 @@ Validação dos tipos de retornos nas validações (Código de erro)
                     $query .= " hora_fim = '$horaFinal', ";
                 }
 
-                $queryFinal = rtrim($query, ', ') . " where codigo = $codigo";
+                $queryFinal = rtrim($query, ", ") . " where codigo = $codigo";
 
                 $this->db->query($queryFinal);
 

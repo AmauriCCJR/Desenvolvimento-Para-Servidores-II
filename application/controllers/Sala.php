@@ -230,7 +230,7 @@ Validação dos tipos de retornos nas validações (Código de erro)
                     ];
                 }
                 if ($retornoDescricao['codigoHelper'] != 0) {
-                    $erros = [
+                    $erros[] = [
                         'codigo' => $retornoDescricao['codigoHelper'],
                         'campo' => 'Descrição',
                         'msg' => $retornoDescricao['msg']
@@ -376,7 +376,7 @@ Validação dos tipos de retornos nas validações (Código de erro)
                         $this->setCodigo($resultado->codigo);
                         $this->setDescricao($resultado->descricao);
                         $this->setAndar($resultado->andar);
-                        $this->setCapacidade($resultado->Capacidade);
+                        $this->setCapacidade($resultado->capacidade);
 
                         // Carrega e executa método de alteração do modelo
                         $this->load->model('M_sala');

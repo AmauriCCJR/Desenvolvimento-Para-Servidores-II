@@ -89,6 +89,11 @@ Validação dos tipos de retornos nas validações (Código de erro)
         return $dados;
     }
 
+    public function consultarHorarioPublic($codigo, $horaInicial, $horaFinal){
+        return $this->consultarHorario($codigo, $horaInicial, $horaFinal);
+
+    }
+
     public function consultar($codigo, $descricao, $horaInicial, $horaFinal)
     {
         try {

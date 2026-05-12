@@ -166,6 +166,10 @@ class M_turma extends CI_Model
         return $dados;
     }
 
+    public function consultarTurmaCodPublic($codigo){
+        return $this->consultarTurmaCod($codigo);
+    }
+
     public function desativar($codigo){
         try {
             $retornoConsulta = $this->consultarTurmaCod($codigo);

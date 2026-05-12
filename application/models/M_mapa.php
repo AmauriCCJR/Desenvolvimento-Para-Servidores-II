@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
 include_once("M_sala.php");
@@ -7,10 +7,11 @@ include_once("M_professor.php");
 include_once("M_horario.php");
 
 
-class M_mapa extends CI_Model{
+class M_mapa extends CI_Model
+{
 
 
-/*
+    /*
 0 - Erro de exceção
 1 - operação realizada no banco de dados com sucesso
 7 - Reserva desativada no sistema
@@ -22,109 +23,113 @@ class M_mapa extends CI_Model{
  */
 
 
-public function inserir($dataReserva, $codigoSala, $codigoTurma, $codigoProfessor, $codigoHorario)
-{
+    public function inserir($dataReserva, $codigoSala, $codigoTurma, $codigoProfessor, $codigoHorario)
+    {
 
-    try {
-        $retornoConsultaReservaTotal = $this->ConsultarReservaTotal($dataReserva, $codigoSala, $codigoTurma, $codigoProfessor, $codigoHorario);
-        if ($retornoConsultaReservaTotal['codigo'] == 11 || $retornoConsultaReservaTotal['codigo'] == 7){
-            $salaObj = new M_sala();
+        try {
+            $retornoConsultaReservaTotal = $this->ConsultarReservaTotal($dataReserva, $codigoSala, $codigoTurma, $codigoProfessor, $codigoHorario);
+            if ($retornoConsultaReservaTotal['codigo'] == 11 || $retornoConsultaReservaTotal['codigo'] == 7) {
+                $salaObj = new M_sala();
 
-            $retornoConsultaSala = $salaObj->consultar($codigoSala, '', '', '');
+                $retornoConsultaSala = $salaObj->consultar($codigoSala, '', '', '');
 
-            if ($retornoConsultaSala['codigo'] == 1){
-                $horaObj = new M_horario();
-                $retornoConsultaHorario = $horaObj->consultarHorarioPublic($codigoHorario, '', '');
+                if ($retornoConsultaSala['codigo'] == 1) {
+                    $horaObj = new M_horario();
+                    $retornoConsultaHorario = $horaObj->consultarHorarioPublic($codigoHorario, '', '');
 
-                if ($retornoConsultaHorario['codigo'] == 10){
-                    $turmaObj = new M_turma();
-                    $retornoConsultaTurma = $turmaObj->consultarTurmaCodPublic($codigoTurma);
+                    if ($retornoConsultaHorario['codigo'] == 10) {
+                        $turmaObj = new M_turma();
+                        $retornoConsultaTurma = $turmaObj->consultarTurmaCodPublic($codigoTurma);
 
-                    if ($retornoConsultaTurma['codigo'] == 10){
-                        $professorObj = new M_professor();
-                        $retornoConsultaProfessor = $professorObj->consultar($codigoProfessor, '', '', '');
+                        if ($retornoConsultaTurma['codigo'] == 10) {
+                            $professorObj = new M_professor();
+                            $retornoConsultaProfessor = $professorObj->consultar($codigoProfessor, '', '', '');
 
-                        if ($retornoConsultaProfessor['codigo'] == 1){
-                            $this->db->query("INSERT INTO tbl_mapa (dataReserva, sala, codigo_horario, codigo_turma, codigo_professor)
-                            VALUES ('" .$dataReserva. "', $codigoSala, $codigoHorario, $codigoTurma, $codigoProfessor)");
+                            if ($retornoConsultaProfessor['codigo'] == 1) {
+                                $this->db->query("INSERT INTO tbl_mapa (dataReserva, sala, codigo_horario, codigo_turma, codigo_professor)
+                            VALUES ('" . $dataReserva . "', $codigoSala, $codigoHorario, $codigoTurma, $codigoProfessor)");
 
-                            if ($this->db->affected_rows() > 0) {
-                                $dados = array('codigo' => 1, 'msg' => 'Reserva cadastrada corretamente');
+                                if ($this->db->affected_rows() > 0) {
+                                    $dados = array('codigo' => 1, 'msg' => 'Reserva cadastrada corretamente');
+                                } else {
+                                    $dados = array(
+                                        'codigo' => 9,
+                                        'msg' => 'Houve algum problema na inserção na tabela de reservas'
+                                    );
+                                }
                             } else {
                                 $dados = array(
-                                    'codigo' => 9,
-                                    'msg' => 'Houve algum problema na inserção na tabela de reservas'
+                                    'codigo' => $retornoConsultaProfessor['codigo'],
+                                    'msg' => $retornoConsultaProfessor['msg']
                                 );
                             }
                         } else {
                             $dados = array(
-                                'codigo' => $retornoConsultaProfessor['codigo'],
-                                'msg' => $retornoConsultaProfessor['msg']
+                                'codigo' => $retornoConsultaTurma['codigo'],
+                                'msg' => $retornoConsultaTurma['msg']
                             );
                         }
                     } else {
                         $dados = array(
-                            'codigo' => $retornoConsultaTurma['codigo'],
-                            'msg' => $retornoConsultaTurma['msg']
+                            'codigo' => $retornoConsultaHorario['codigo'],
+                            'msg' => $retornoConsultaHorario['msg']
                         );
                     }
-                } else {
-                    $dados = array(
-                        'codigo' => $retornoConsultaHorario['codigo'],
-                        'msg' => $retornoConsultaHorario['msg']
-                    );
-                }
                 } else {
                     $dados = array(
                         'codigo' => $retornoConsultaSala['codigo'],
                         'msg' => $retornoConsultaSala['msg']
                     );
                 }
-        } else {
-            $dados = array(
-                'codigo' => $retornoConsultaReservaTotal['codigo'],
-                'msg' => $retornoConsultaReservaTotal['msg']
-            );
-            } 
+            } else {
+                $dados = array(
+                    'codigo' => $retornoConsultaReservaTotal['codigo'],
+                    'msg' => $retornoConsultaReservaTotal['msg']
+                );
+            }
         } catch (Exception $e) {
             $dados = array(
                 'codigo' => 0,
                 'msg' => 'Houve um erro de exceção: ' . $e->getMessage()
-             );
-       
+            );
+        }
+        return $dados;
+    }
 
-} 
-return $dados;
+    private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario)
+    {
+        try {
+            $sql = "select * from tbl_horario where codigo = $codigoHorario";
+            $retornoHorario = $this->db->query($sql);
 
-}
+            if ($retornoHorario->num_rows() > 0) {
+                $linhaHr = $retornoHorario->row();
+                $horaInicial = $linhaHr->hora_Ini;
+                $horaFinal = $linhaHr->hora_fim;
 
-private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario){
-    try {
-        $sql = "select * from tbl_horario where codigo = $codigoHorario";
-        $retornoHorario = $this->db->query($sql);
-
-        if ($retornoHorario->num_rows() > 0){
-            $linhaHr = $retornoHorario->row();
-            $horaInicial = $linhaHr->hora_Ini;
-            $horaFinal = $linhaHr->hora_fim;
-
-            $sql = "select * from tbl_mapa m, tbl_horario h where m.datareserva = '". $dataReserva. "' 
-            and m.sala = '".$codigoSala."' and m.codigo_horario = h.codigo and (h.hora_Ini >= '".$horaInicial."' and h.hora_Ini < '".$horaFinal."')";
-            $retornoMapa = $this->db->query($sql);
+                $sql = "select * from tbl_mapa m, tbl_horario h where m.datareserva = '" . $dataReserva . "' 
+            and m.sala = '" . $codigoSala . "' and m.codigo_horario = h.codigo and (h.hora_Ini >= '" . $horaInicial . "' and h.hora_Ini < '" . $horaFinal . "')";
+                $retornoMapa = $this->db->query($sql);
 
 
-            if ($retornoMapa->num_rows() > 0){
-                $linha = $retornoMapa->row();
+                if ($retornoMapa->num_rows() > 0) {
+                    $linha = $retornoMapa->row();
 
-                if (trim($linha->estatus) == 'D'){
-                    $dados = array(
-                        'codigo' => 7,
-                        'msg' => 'Reserva desativada no sistema'
-                    );
+                    if (trim($linha->estatus) == 'D') {
+                        $dados = array(
+                            'codigo' => 7,
+                            'msg' => 'Reserva desativada no sistema'
+                        );
+                    } else {
+                        $dados = array(
+                            'codigo' => 8,
+                            'msg' => 'A data ' . $dataReserva . ' está ocupada para esta sala'
+                        );
+                    }
                 } else {
                     $dados = array(
-                        'codigo' => 8,
-                        'msg' => 'A data '. $dataReserva . ' está ocupada para esta sala'
+                        'codigo' => 11,
+                        'msg' => 'Reserva não encontrada'
                     );
                 }
             } else {
@@ -133,19 +138,13 @@ private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario
                     'msg' => 'Reserva não encontrada'
                 );
             }
-            } else {
-                 $dados = array(
-                    'codigo' => 11,
-                    'msg' => 'Reserva não encontrada'
-                 );
-             }
         } catch (Exception $e) {
             $dados = array(
                 'codigo' => 0,
                 'msg' => 'Houve um erro de exceção: ' . $e->getMessage()
-             );
-         }
-         return $dados;
+            );
+        }
+        return $dados;
     }
 
 
@@ -217,8 +216,7 @@ private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario
     {
         try {
             $retornoConsultaCodigo = $this->consultar(
-                $codigo,"","","","",""
-            );
+                $codigo,"","","","","");
 
             if ($retornoConsultaCodigo['codigo'] == 1) {
                 $query = "update tbl_mapa set ";
@@ -243,7 +241,7 @@ private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario
 
                 if ($codHorario != "") {
                     $horarioObj = new M_horario();
-                    $retornoConsultaHorario = $horarioObj->consultarHorarioPublic($codHorario,'','');
+                    $retornoConsultaHorario = $horarioObj->consultarHorarioPublic($codHorario, '', '');
 
                     if ($retornoConsultaHorario['codigo'] == 1) {
                         $query .= "codigo_horario = $codHorario, ";
@@ -271,7 +269,7 @@ private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario
 
                 if ($codProfessor != "") {
                     $professorObj = new M_professor();
-                    $retornoConsultaProfessor = $professorObj->consultar($codProfessor,'','','');
+                    $retornoConsultaProfessor = $professorObj->consultar($codProfessor, '', '', '');
 
                     if ($retornoConsultaProfessor['codigo'] == 1) {
                         $query .= "codigo_professor = $codProfessor, ";
@@ -318,8 +316,7 @@ private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario
     {
         try {
             $retornoConsulta = $this->consultar(
-                $codigo,"","","","",""
-            );
+                $codigo,"","","","","");
 
             if ($retornoConsulta['codigo'] == 1) {
                 $this->db->query("delete from tbl_mapa
@@ -352,26 +349,3 @@ private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario
         return $dados;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

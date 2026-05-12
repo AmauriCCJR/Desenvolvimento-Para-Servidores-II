@@ -43,6 +43,96 @@ Validação dos tipos de retornos nas validações (Código de erro)
     Return $this-> estatus;
  }
 
+ public function setCodigo($codigoFront){
+    $this->codigo = $codigoFront;
+ }
+
+ public function setDescricao($descricaoFront){
+   $this-> descricao = $descricaoFront;
+ }
+
+ public function setCapacidade ($capacidadeFront){
+   $this-> capacidade = $capacidadeFront;
+ }
+
+ public function setDataInicio ($dataInicioFront){
+   $this->dataInicio = $dataInicioFront;
+ }
+
+ public function setEstatus($estatusFront){
+   $this->estatus = $estatusFront;
+ }
+
+ public function inserir(){
+   $erros = [];
+   $sucesso = false;
+
+   try {
+      $json = file_get_contents('php://input');
+      $resultado = json_decode($json);
+      $lista = [
+         "descricao" => '0',
+         "capacidade" => '0',
+         "dataInicio" => '0'
+      ];
+
+      if (verificarParametro($resultado, $lista) != 1){
+         $erros[] = ['codigo' => 99, 'msg' => 'Campos inexistentes ou incorretos no FrontEnd'];
+      } else {
+         $retornoDescricao = validarDados($resultado->descricao, 'string', true);
+         $retornoCapacidade = validarDados($resultado->capacidade, 'int', true);
+         $retornoDataInicio = validarDados($resultado->dataInicio, 'date', true);
+
+         if ($retornoDescricao['codigoHelper'] != 0){
+            $erros[] = ['codigo' => $retornoDescricao['codigoHelper'],
+            'campo' => 'Descrição',
+            'msg' => $retornoCapacidade['msg']];
+         }
+         if ($retornoCapacidade['codigoHelper'] != 0){
+            $erros[] = ['codigo' => $retornoCapacidade['codigoHelper'],
+            'campo' => 'Capacidade',
+            'msg' => $retornoCapacidade['msg']]; 
+         }  
+         if ($retornoDataInicio['codigoHelper'] != 0){
+            $erros[] = ['codigo' => $retornoDataInicio['codigoHelper'],
+            'campos'=> 'Data Inicio',
+            'msg' => $retornoDataInicio['msg']];
+         }
+
+         if (empty($erros)){
+            $this->setDescricao($resultado->descricao);
+            $this->setCapacidade($resultado->capacidade);
+            $this->setDataInicio($resultado->dataInicio);
+
+            $this->load->model('M_turma');
+            $resBanco = $this->M_turma->inserir(
+               $this->getDescricao(),
+               $this->getCapacidade(),
+               $this->getDataInicio()
+            );
+
+            if ($resBanco['codigo'] == 1){
+               $sucesso = true;
+            } else {
+               $erros[] = ['codigo' => $resBanco['codigo'], 'msg' => $resBanco['msg']];
+            }
+         }
+
+      }
+   } catch (Exception $e){
+      $erros[] = ['codigo' => 0, 'msg' => 'Erro Inesperado: '.$e->getMessage()];
+   }
+
+
+   if ($sucesso == true){
+      $retorno = ['sucesso' => $sucesso, 'codigo' => $resBanco['codigo'], 'msg' => $resBanco['msg']];
+   } else {
+      $retorno = ['sucesso'=> $sucesso, 'Erros' => $erros];
+   }
+
+   echo json_encode($retorno);
+ }
+
 
 
 

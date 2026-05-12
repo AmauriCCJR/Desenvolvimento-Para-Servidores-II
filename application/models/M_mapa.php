@@ -100,7 +100,7 @@ return $dados;
 
 private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario){
     try {
-        $sql = "select * from tbl_horario where codigo_horario = $codigoHorario";
+        $sql = "select * from tbl_horario where codigo = $codigoHorario";
         $retornoHorario = $this->db->query($sql);
 
         if ($retornoHorario->num_rows() > 0){

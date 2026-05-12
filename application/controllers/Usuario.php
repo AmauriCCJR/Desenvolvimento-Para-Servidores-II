@@ -74,7 +74,7 @@ class Usuario extends CI_Controller {
                 "senha"   => '0'
             );
 
-            if (verificarParam($resultado, $lista) != 1) {
+            if (verificarParametro($resultado, $lista) != 1) {
                 $erros[] = ['codigo' => 99, 'msg' => 'Campos inexistentes ou incorretos no FrontEnd.'];
             } else {
                 $retornoNome    = validarDados($resultado->nome, 'string', true);
@@ -159,7 +159,7 @@ class Usuario extends CI_Controller {
                 "usuario" => '0'
             );
 
-            if (verificarParam($resultado, $lista) != 1) {
+            if (verificarParametro($resultado, $lista) != 1) {
                 $erros[] = ['codigo' => 99, 'msg' => 'Campos inexistentes ou incorretos no FrontEnd.'];
             } else {
                 $retornoNome    = validarDadosConsulta($resultado->nome, 'string');
@@ -237,7 +237,7 @@ class Usuario extends CI_Controller {
                 "senha"     => '0'
             );
 
-            if (verificarParam($resultado, $lista) != 1) {
+            if (verificarParametro($resultado, $lista) != 1) {
                 $erros[] = ['codigo' => 99, 'msg' => 'Campos inexistentes ou incorretos no FrontEnd.'];
             } else {
                 if (trim($resultado->nome) == '' && trim($resultado->email) == '' &&
@@ -326,7 +326,7 @@ class Usuario extends CI_Controller {
                 "idUsuario" => '0'
             );
 
-            if (verificarParam($resultado, $lista) != 1) {
+            if (verificarParametro($resultado, $lista) != 1) {
                 $erros[] = ['codigo' => 99, 'msg' => 'Campos inexistentes ou incorretos no FrontEnd.'];
             } else {
                 $retornoIdUsuario = validarDados($resultado->idUsuario, 'int');
@@ -383,7 +383,7 @@ class Usuario extends CI_Controller {
                 "senha"   => '0'
             );
 
-            if (verificarParam($resultado, $lista) != 1) {
+            if (verificarParametro($resultado, $lista) != 1) {
                 $erros[] = ['codigo' => 99, 'msg' => 'Campos inexistentes ou incorretos no FrontEnd.'];
             } else {
                 $retornoUsuario = validarDados($resultado->usuario, 'string', true);

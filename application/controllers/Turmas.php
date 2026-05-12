@@ -284,7 +284,7 @@ Validação dos tipos de retornos nas validações (Código de erro)
             if (trim($resultado->descricao) == '' && trim($resultado->capacidade) == '' && trim($resultado->dataInicio) == '') {
                $erros[] = ['codigo' => 12, 'msg' => 'Pelo menos um parametro precisa ser passado para a atualização!'];
             } else {
-               $retornoCodigo = validarDados($resultado->codigo, 'int', true);
+               $retornoCodigo = validarDadosConsulta($resultado->codigo, 'int', true);
                $retornoDescricao = validarDadosConsulta($resultado->descricao, 'string');
                $retornoCapacidade = validarDadosConsulta($resultado->capacidade, 'int');
                $retornoDataInicio = validarDadosConsulta($resultado->dataInicio, 'date');

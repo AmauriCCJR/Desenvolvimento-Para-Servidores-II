@@ -73,7 +73,8 @@ class M_professor extends CI_Model
         return $dados;
     }
 
-    private function consultaProfessorCod($codigo){
+    private function consultaProfessorCod($codigo)
+    {
 
         try {
             $sql = "SELECT * FROM tbl_professor WHERE codigo = $codigo and estatus = ''";
@@ -82,7 +83,6 @@ class M_professor extends CI_Model
 
             if ($retornoProfessor->num_rows() > 0) {
                 $dados = array('codigo' => 1, 'msg' => 'Consulta efetuada com sucesso');
-                
             } else {
                 $dados = array(
                     'codigo' => 98,
@@ -148,19 +148,19 @@ class M_professor extends CI_Model
     public function alterar($codigo, $nome, $cpf, $tipo)
     {
         try {
-           
+
             $retornoConsulta = $this->consultaProfessorCod($codigo);
 
             if ($retornoConsulta['codigo'] == 1) {
                 $query = "update tbl_professor set ";
 
-                if ($nome !=''){
+                if ($nome != '') {
                     $query .= "nome = '$nome', ";
                 }
-                if ($cpf !=''){
+                if ($cpf != '') {
                     $query .= "cpf = '$cpf', ";
                 }
-                if ($tipo !=''){
+                if ($tipo != '') {
                     $query .= "tipo = '$tipo', ";
                 }
 

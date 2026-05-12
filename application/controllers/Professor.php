@@ -302,7 +302,7 @@ Validação dos tipos de retornos nas validações (Código de erro)
                 if (trim($resultado->nome) == '' && trim($resultado->cpf) == '' && trim($resultado->tipo) == '') {
                     $erros[] = ['codigo' => 12, 'msg' => 'Pelo menos um parametro precisa ser passado para a atualização!'];
                 } else {
-                    $retornoCodigo = validarDados($resultado->codigo,'int', true);
+                    $retornoCodigo = validarDadosConsulta($resultado->codigo,'int', true);
                     $retornoNome = validarDadosConsulta($resultado->nome,'string');
                     $retornoCPF = validarDadosConsulta($resultado->cpf,'string');
                     $retornoTipo = validarDadosConsulta($resultado->tipo,'string');

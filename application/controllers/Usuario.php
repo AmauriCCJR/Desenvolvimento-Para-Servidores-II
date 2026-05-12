@@ -300,8 +300,7 @@ class Usuario extends CI_Controller {
             }
         } catch (Exception $e) {
             $retorno = array('codigo' => 0,
-                             'msg'    => 'ATENÇÃO: O seguinte erro aconteceu -> ',
-                                         $e->getMessage());
+                             'msg'    => 'ATENÇÃO: O seguinte erro aconteceu -> ',$e->getMessage());
         }
 
         if ($sucesso == true) {
@@ -356,8 +355,7 @@ class Usuario extends CI_Controller {
             }
         } catch (Exception $e) {
             $retorno = array('codigo' => 0,
-                             'msg'    => 'ATENÇÃO: O seguinte erro aconteceu -> ',
-                                         $e->getMessage());
+                             'msg'    => 'ATENÇÃO: O seguinte erro aconteceu -> ',$e->getMessage());
         }
 
         if ($sucesso == true) {
@@ -422,8 +420,7 @@ class Usuario extends CI_Controller {
             }
         } catch (Exception $e) {
             $retorno = array('codigo' => 0,
-                             'msg'    => 'ATENÇÃO: O seguinte erro aconteceu -> ',
-                                         $e->getMessage());
+                             'msg'    => 'ATENÇÃO: O seguinte erro aconteceu -> ',$e->getMessage());
         }
 
         if ($sucesso == true) {

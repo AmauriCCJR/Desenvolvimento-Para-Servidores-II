@@ -105,11 +105,11 @@ private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario
 
         if ($retornoHorario->num_rows() > 0){
             $linhaHr = $retornoHorario->row();
-            $horaInicial = $linhaHr->horaInicial;
-            $horaFinal = $linhaHr->horaFinal;
+            $horaInicial = $linhaHr->hora_Ini;
+            $horaFinal = $linhaHr->hora_fim;
 
             $sql = "select * from tbl_mapa m, tbl_horario h where m.datareserva = '". $dataReserva. "' 
-            and m.sala = '".$codigoSala."' and m.codigo_horario = h.codigo and ((h.horaInicial >= '".$horaInicial."' and h.horaInicial < '".$horaFinal."')";
+            and m.sala = '".$codigoSala."' and m.codigo_horario = h.codigo and (h.hora_Ini >= '".$horaInicial."' and h.hora_Ini < '".$horaFinal."')";
             $retornoMapa = $this->db->query($sql);
 
 

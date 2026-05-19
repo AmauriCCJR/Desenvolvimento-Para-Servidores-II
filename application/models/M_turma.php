@@ -3,33 +3,75 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_turma extends CI_Model
 {
-    public function inserir($codigo, $descricao, $capacidade, $dataInicio)
-    {
+   public function inserir($codigo, $descricao, $capacidade, $dataInicio)
+{
+    $retornoConsulta = $this->consultaTurma($codigo);
 
-        try {
+    try {
+        if ($retornoConsulta['codigo'] != 9 && $retornoConsulta['codigo'] != 10) {
             $this->db->query("INSERT INTO tbl_turma (codigo, descricao, capacidade, dataInicio)
                 VALUES ($codigo, '$descricao', $capacidade, '$dataInicio')");
 
             if ($this->db->affected_rows() > 0) {
                 $dados = array('codigo' => 1, 'msg' => 'Turma cadastrada corretamente');
             } else {
-                $dados = array(
-                    'codigo' => 8,
-                    'msg' => 'Houve algum problema na inserção na tabela de turmas'
-                );
+                $dados = array('codigo' => 9, 'msg' => 'Houve algum problema na insercao da turma');
             }
-        } catch (Exception $e) {
+        } else {
             $dados = array(
-                'codigo' => 0,
-                'msg' => 'Atenção: O seguinte erro aconteceu -> ' . $e->getMessage()
+                'codigo' => $retornoConsulta['codigo'],
+                'msg'    => $retornoConsulta['msg']
             );
         }
-
-        return $dados;
+    } catch (Exception $e) {
+        $dados = array(
+            'codigo' => 0,
+            'msg'    => 'Erro: ' . $e->getMessage()
+        );
     }
 
+    return $dados;
+}
+
+    private function consultaTurma($codigo)
+{
+    try {
+        $sql = "SELECT * FROM tbl_turma WHERE codigo = $codigo";
+        $retorno = $this->db->query($sql);
+
+        if ($retorno->num_rows() > 0) {
+            $linha = $retorno->row();
+
+            if (trim($linha->estatus) == 'D') {
+                $dados = array(
+                    'codigo' => 9,
+                    'msg'    => 'Turma desativada no sistema'
+                );
+            } else {
+                $dados = array(
+                    'codigo' => 10,
+                    'msg'    => 'Turma ja cadastrada no sistema'
+                );
+            }
+        } else {
+            $dados = array(
+                'codigo' => 98,
+                'msg'    => 'Turma nao encontrada'
+            );
+        }
+    } catch (Exception $e) {
+        $dados = array(
+            'codigo' => 0,
+            'msg'    => 'Erro: ' . $e->getMessage()
+        );
+    }
+
+    return $dados;
+}
     public function consultar($codigo, $descricao, $capacidade, $dataInicio)
+
     {
+        
         try {
             $sql = "SELECT codigo, descricao, capacidade, dataInicio, date_format(dataInicio, '%d/%m/%Y') as dataInicioObra FROM tbl_turma WHERE estatus = '' ";
 
@@ -54,6 +96,7 @@ class M_turma extends CI_Model
                     'dados' => $retorno->result()
                 );
             } else {
+                
                 $dados = array(
                     'codigo' => 11,
                     'msg' => 'Turma não encontrada'

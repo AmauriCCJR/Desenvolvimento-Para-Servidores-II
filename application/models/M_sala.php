@@ -82,7 +82,8 @@ class M_sala extends CI_Model
     {
 
         try {
-            $sql = "select * from tbl_sala where estatus = '' ";
+            $sql = "select * from tbl_sala where (estatus = '' OR estatus IS NULL) AND estatus != 'D' ";
+
 
             if (trim($codigo) != '') {
                 $sql = $sql . " and codigo = '$codigo' ";
@@ -93,7 +94,7 @@ class M_sala extends CI_Model
             }
 
             if (trim($descricao) != '') {
-                $sql = $sql . " and descricao like %'$descricao'% ";
+                $sql = $sql . " and descricao like '%$descricao%' ";
             }
 
             if (trim($capacidade) != '') {

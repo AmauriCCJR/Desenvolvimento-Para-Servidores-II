@@ -170,7 +170,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodSala['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodSala['codigoHelper'],
-                        'campo' => 'Código da Sala',
+                        'campo' => 'Codigo da Sala',
                         'msg' => $retornoCodSala['msg']
                     ];
                 }
@@ -178,7 +178,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodHorario['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodHorario['codigoHelper'],
-                        'campo' => 'Código do Horário',
+                        'campo' => 'Codigo do Horario',
                         'msg' => $retornoCodHorario['msg']
                     ];
                 }
@@ -186,7 +186,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodTurma['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodTurma['codigoHelper'],
-                        'campo' => 'Código da Turma',
+                        'campo' => 'Codigo da Turma',
                         'msg' => $retornoCodTurma['msg']
                     ];
                 }
@@ -194,7 +194,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodProfessor['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodProfessor['codigoHelper'],
-                        'campo' => 'Código do Professor',
+                        'campo' => 'Codigo do Professor',
                         'msg' => $retornoCodProfessor['msg']
                     ];
                 }
@@ -206,6 +206,10 @@ class Mapa extends CI_Controller
                     $this->setCodigoTurma($resultado->codTurma);
                     $this->setCodigoProfessor($resultado->codProfessor);
 
+
+
+
+                    
                     $this->load->model('M_mapa');
                     $resBanco = $this->M_mapa->inserir(
                         $this->getDataReserva(),
@@ -264,7 +268,7 @@ class Mapa extends CI_Controller
             if (verificarParametro($resultado, $lista) != 1) {
                 $erros[] = ['codigo' => 99, 'msg' => 'Campos inexistentes ou incorretos no FrontEnd'];
             } else {
-                $retornoCodigo = validarDadosConsulta($resultado->codigo, 'int', true);
+                $retornoCodigo = validarDadosConsulta($resultado->codigo, 'int');
                 $retornoDataReserva = validarDadosConsulta($resultado->dataReserva, 'date');
                 $retornoCodSala = validarDadosConsulta($resultado->codSala, 'int');
                 $retornoCodHorario = validarDadosConsulta($resultado->codHorario, 'int');
@@ -274,7 +278,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodigo['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodigo['codigoHelper'],
-                        'campo' => 'Código',
+                        'campo' => 'Codigo',
                         'msg' => $retornoCodigo['msg']
                     ];
                 }
@@ -290,7 +294,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodSala['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodSala['codigoHelper'],
-                        'campo' => 'Código da Sala',
+                        'campo' => 'Codigo da Sala',
                         'msg' => $retornoCodSala['msg']
                     ];
                 }
@@ -298,7 +302,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodHorario['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodHorario['codigoHelper'],
-                        'campo' => 'Código do Horário',
+                        'campo' => 'Codigo do Horário',
                         'msg' => $retornoCodHorario['msg']
                     ];
                 }
@@ -306,7 +310,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodTurma['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodTurma['codigoHelper'],
-                        'campo' => 'Código da Turma',
+                        'campo' => 'Codigo da Turma',
                         'msg' => $retornoCodTurma['msg']
                     ];
                 }
@@ -314,7 +318,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodProfessor['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodProfessor['codigoHelper'],
-                        'campo' => 'Código do Professor',
+                        'campo' => 'Codigo do Professor',
                         'msg' => $retornoCodProfessor['msg']
                     ];
                 }
@@ -350,17 +354,16 @@ class Mapa extends CI_Controller
         } catch (Exception $e) {
             $erros[] = [
                 'codigo' => 0,
-                'msg' => 'Atenção: O seguinte erro aconteceu -> ' . $e->getMessage()
+                'msg' => 'Atençao: O seguinte erro aconteceu -> ' . $e->getMessage()
             ];
-
+}
             if ($sucesso == true) {
                 $retorno = ['sucesso' => $sucesso, 'codigo' => $resBanco['codigo'], 'msg' => $resBanco['msg'], 'dados' => $resBanco['dados']];
             } else {
                 $retorno = ['sucesso' => $sucesso, 'erros' => $erros];
             }
-
-            echo json_encode($retorno);
-        }
+        
+        echo json_encode($retorno);
     }
 
     public function alterar()
@@ -399,7 +402,7 @@ class Mapa extends CI_Controller
                     if ($retornoCodigo['codigoHelper'] != 0) {
                         $erros[] = [
                             'codigo' => $retornoCodigo['codigoHelper'],
-                            'campo' => 'Código',
+                            'campo' => 'Codigo',
                             'msg' => $retornoCodigo['msg']
                         ];
                     }
@@ -415,7 +418,7 @@ class Mapa extends CI_Controller
                     if ($retornoCodSala['codigoHelper'] != 0) {
                         $erros[] = [
                             'codigo' => $retornoCodSala['codigoHelper'],
-                            'campo' => 'Código da Sala',
+                            'campo' => 'Codigo da Sala',
                             'msg' => $retornoCodSala['msg']
                         ];
                     }
@@ -423,7 +426,7 @@ class Mapa extends CI_Controller
                     if ($retornoCodHorario['codigoHelper'] != 0) {
                         $erros[] = [
                             'codigo' => $retornoCodHorario['codigoHelper'],
-                            'campo' => 'Código do Horário',
+                            'campo' => 'Codigo do Horário',
                             'msg' => $retornoCodHorario['msg']
                         ];
                     }
@@ -431,7 +434,7 @@ class Mapa extends CI_Controller
                     if ($retornoCodTurma['codigoHelper'] != 0) {
                         $erros[] = [
                             'codigo' => $retornoCodTurma['codigoHelper'],
-                            'campo' => 'Código da Turma',
+                            'campo' => 'Codigo da Turma',
                             'msg' => $retornoCodTurma['msg']
                         ];
                     }
@@ -439,7 +442,7 @@ class Mapa extends CI_Controller
                     if ($retornoCodProfessor['codigoHelper'] != 0) {
                         $erros[] = [
                             'codigo' => $retornoCodProfessor['codigoHelper'],
-                            'campo' => 'Código do Professor',
+                            'campo' => 'Codigo do Professor',
                             'msg' => $retornoCodProfessor['msg']
                         ];
                     }
@@ -476,7 +479,7 @@ class Mapa extends CI_Controller
         } catch (Exception $e) {
             $erros[] = [
                 'codigo' => 0,
-                'msg' => 'Atenção: O seguinte erro aconteceu -> ' . $e->getMessage()
+                'msg' => 'Atençao: O seguinte erro aconteceu -> ' . $e->getMessage()
             ];
         }
 
@@ -509,7 +512,7 @@ class Mapa extends CI_Controller
                 if ($retornoCodigo['codigoHelper'] != 0) {
                     $erros[] = [
                         'codigo' => $retornoCodigo['codigoHelper'],
-                        'campo' => 'Código',
+                        'campo' => 'Codigo',
                         'msg' => $retornoCodigo['msg']
                     ];
                 }
@@ -533,7 +536,7 @@ class Mapa extends CI_Controller
         } catch (Exception $e) {
             $erros[] = [
                 'codigo' => 0,
-                'msg' => 'Atenção: O seguinte erro aconteceu -> ' . $e->getMessage()
+                'msg' => 'Atençao: O seguinte erro aconteceu -> ' . $e->getMessage()
             ];
         }
 

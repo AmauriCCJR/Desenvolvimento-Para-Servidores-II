@@ -23,31 +23,31 @@ class M_mapa extends CI_Model
  */
 
 
-    public function inserir($dataReserva, $codigoSala, $codigoTurma, $codigoProfessor, $codigoHorario)
+    public function inserir($dataReserva, $codSala, $codTurma, $codProfessor, $codHorario)
     {
 
         try {
-            $retornoConsultaReservaTotal = $this->ConsultarReservaTotal($dataReserva, $codigoSala, $codigoTurma, $codigoProfessor, $codigoHorario);
+            $retornoConsultaReservaTotal = $this->ConsultarReservaTotal($dataReserva, $codSala, $codTurma, $codProfessor, $codHorario);
             if ($retornoConsultaReservaTotal['codigo'] == 11 || $retornoConsultaReservaTotal['codigo'] == 7) {
                 $salaObj = new M_sala();
 
-                $retornoConsultaSala = $salaObj->consultar($codigoSala, '', '', '');
+                $retornoConsultaSala = $salaObj->consultar($codSala, '', '', '');
 
                 if ($retornoConsultaSala['codigo'] == 1) {
                     $horaObj = new M_horario();
-                    $retornoConsultaHorario = $horaObj->consultarHorarioPublic($codigoHorario, '', '');
+                    $retornoConsultaHorario = $horaObj->consultarHorarioPublic($codHorario, '', '');
 
                     if ($retornoConsultaHorario['codigo'] == 10) {
                         $turmaObj = new M_turma();
-                        $retornoConsultaTurma = $turmaObj->consultarTurmaCodPublic($codigoTurma);
+                        $retornoConsultaTurma = $turmaObj->consultarTurmaCodPublic($codTurma);
 
                         if ($retornoConsultaTurma['codigo'] == 10) {
                             $professorObj = new M_professor();
-                            $retornoConsultaProfessor = $professorObj->consultar($codigoProfessor, '', '', '');
+                            $retornoConsultaProfessor = $professorObj->consultar($codProfessor, '', '', '');
 
                             if ($retornoConsultaProfessor['codigo'] == 1) {
                                 $this->db->query("INSERT INTO tbl_mapa (dataReserva, sala, codigo_horario, codigo_turma, codigo_professor)
-                            VALUES ('" . $dataReserva . "', $codigoSala, $codigoHorario, $codigoTurma, $codigoProfessor)");
+                            VALUES ('" .$dataReserva."', $codSala, $codHorario, $codTurma, $codProfessor)");
 
                                 if ($this->db->affected_rows() > 0) {
                                     $dados = array('codigo' => 1, 'msg' => 'Reserva cadastrada corretamente');
@@ -96,58 +96,71 @@ class M_mapa extends CI_Model
         return $dados;
     }
 
-    private function consultarReservaTotal($dataReserva, $codigoSala, $codigoHorario)
-    {
-        try {
-            $sql = "select * from tbl_horario where codigo = $codigoHorario";
-            $retornoHorario = $this->db->query($sql);
+    private function consultarReservaTotal($dataReserva, $codSala, $codTurma, $codProfessor, $codHorario)
+{
+    try {
+        $sql = "SELECT * FROM tbl_horario WHERE codigo = $codHorario";
+        $retornoHorario = $this->db->query($sql);
 
-            if ($retornoHorario->num_rows() > 0) {
-                $linhaHr = $retornoHorario->row();
-                $horaInicial = $linhaHr->hora_Ini;
-                $horaFinal = $linhaHr->hora_fim;
+        if ($retornoHorario->num_rows() > 0) {
+            $linhaHr     = $retornoHorario->row();
+            $horaInicial = $linhaHr->hora_ini;
+            $horaFinal   = $linhaHr->hora_fim;
 
-                $sql = "select * from tbl_mapa m, tbl_horario h where m.datareserva = '" . $dataReserva . "' 
-            and m.sala = '" . $codigoSala . "' and m.codigo_horario = h.codigo and (h.hora_Ini >= '" . $horaInicial . "' and h.hora_Ini < '" . $horaFinal . "')";
-                $retornoMapa = $this->db->query($sql);
+            $sql = "SELECT * FROM tbl_mapa m, tbl_horario h
+                    WHERE m.datareserva = '" . $dataReserva . "'
+                    AND m.codigo_horario = h.codigo
+                    AND (h.hora_fim >= '" . $horaInicial . "' AND h.hora_ini <= '" . $horaFinal . "')
+                    AND (
+                        m.sala = $codSala
+                        OR m.codigo_turma  = $codTurma
+                        OR m.codigo_professor = $codProfessor
+                    )";
+            $retornoMapa = $this->db->query($sql);
 
+            if ($retornoMapa->num_rows() > 0) {
+                $linha = $retornoMapa->row();
 
-                if ($retornoMapa->num_rows() > 0) {
-                    $linha = $retornoMapa->row();
-
-                    if (trim($linha->estatus) == 'D') {
-                        $dados = array(
-                            'codigo' => 7,
-                            'msg' => 'Reserva desativada no sistema'
-                        );
-                    } else {
-                        $dados = array(
-                            'codigo' => 8,
-                            'msg' => 'A data ' . $dataReserva . ' está ocupada para esta sala'
-                        );
-                    }
-                } else {
+                if (trim($linha->estatus) == 'D') {
                     $dados = array(
-                        'codigo' => 11,
-                        'msg' => 'Reserva não encontrada'
+                        'codigo' => 7,
+                        'msg'    => 'Reserva desativada no sistema'
+                    );
+                } else {
+                    if ($linha->sala == $codSala) {
+                        $msg = 'A data ' . $dataReserva . ' esta ocupada para esta sala';
+                    } elseif ($linha->codigo_turma == $codTurma) {
+                        $msg = 'A turma ja possui reserva neste horario em ' . $dataReserva;
+                    } else {
+                        $msg = 'O professor ja possui reserva neste horario em ' . $dataReserva;
+                    }
+
+                    $dados = array(
+                        'codigo' => 8,
+                        'msg'    => $msg
                     );
                 }
             } else {
                 $dados = array(
                     'codigo' => 11,
-                    'msg' => 'Reserva não encontrada'
+                    'msg'    => 'Reserva nao encontrada'
                 );
             }
-        } catch (Exception $e) {
+        } else {
             $dados = array(
-                'codigo' => 0,
-                'msg' => 'Houve um erro de exceção: ' . $e->getMessage()
+                'codigo' => 11,
+                'msg'    => 'Reserva nao encontrada'
             );
         }
-        return $dados;
+    } catch (Exception $e) {
+        $dados = array(
+            'codigo' => 0,
+            'msg'    => 'Houve um erro de excecao: ' . $e->getMessage()
+        );
     }
-
-
+    
+    return $dados;
+}
     public function consultar($codigo, $dataReserva, $codSala, $codHorario, $codTurma, $codProfessor)
     {
         try {
@@ -158,32 +171,32 @@ class M_mapa extends CI_Model
                     from tbl_mapa m, tbl_professor p, tbl_horario h, tbl_turma t, tbl_sala s
                     where m.estatus = ''
                       and m.codigo_professor = p.codigo
-                      and m.codigo_horario   = h.codigo
-                      and m.codigo_turma     = t.codigo
-                      and m.sala             = s.codigo ";
+                      and m.codigo_horario = h.codigo
+                      and m.codigo_turma = t.codigo
+                      and m.sala = s.codigo ";
 
             if (trim($codigo) != '') {
-                $sql = $sql . "and m.codigo = $codigo ";
+                $sql = $sql . "and m.codigo = " . $codigo . " ";
             }
 
             if (trim($dataReserva) != '') {
-                $sql = $sql . "and m.datareserva = '" . $dataReserva . "' ";
+                $sql = $sql . "and m.datareserva = '" . $this->db->escape_str($dataReserva) . "' ";
             }
 
             if (trim($codSala) != '') {
-                $sql = $sql . "and m.sala = $codSala ";
+                $sql = $sql . "and m.sala = " . $codSala . " ";
             }
 
             if (trim($codHorario) != '') {
-                $sql = $sql . "and m.codigo_horario = $codHorario ";
+                $sql = $sql . "and m.codigo_horario = " . $codHorario . " ";
             }
 
             if (trim($codTurma) != '') {
-                $sql = $sql . "and m.codigo_turma = $codTurma ";
+                $sql = $sql . "and m.codigo_turma = " . $codTurma . " ";
             }
 
             if (trim($codProfessor) != '') {
-                $sql = $sql . "and m.codigo_professor = $codProfessor ";
+                $sql = $sql . "and m.codigo_professor = " . $codProfessor . " ";
             }
 
             $sql = $sql . " order by m.datareserva, h.hora_ini, m.codigo_horario, m.sala ";
@@ -208,7 +221,7 @@ class M_mapa extends CI_Model
                 'msg' => 'ATENÇÃO: O seguinte erro aconteceu -> ' . $e->getMessage()
             );
         }
-
+     
         return $dados;
     }
 
@@ -236,6 +249,7 @@ class M_mapa extends CI_Model
                             'codigo' => $retornoConsultaSala['codigo'],
                             'msg' => $retornoConsultaSala['msg']
                         );
+                        return $dados;
                     }
                 }
 
@@ -250,6 +264,7 @@ class M_mapa extends CI_Model
                             'codigo' => $retornoConsultaHorario['codigo'],
                             'msg' => $retornoConsultaHorario['msg']
                         );
+                        return $dados;
                     }
                 }
 
@@ -264,6 +279,7 @@ class M_mapa extends CI_Model
                             'codigo' => $retornoConsultaTurma['codigo'],
                             'msg' => $retornoConsultaTurma['msg']
                         );
+                        return $dados;
                     }
                 }
 
@@ -278,10 +294,11 @@ class M_mapa extends CI_Model
                             'codigo' => $retornoConsultaProfessor['codigo'],
                             'msg' => $retornoConsultaProfessor['msg']
                         );
+                        return $dados;
                     }
                 }
 
-                $queryFinal = rtrim($query, ", ") . " where codigo = $codigo";
+                $queryFinal = rtrim($query, ", ") . " where codigo = " . $codigo;
 
                 $this->db->query($queryFinal);
 
@@ -308,7 +325,7 @@ class M_mapa extends CI_Model
                 'msg' => 'ATENÇÃO: O seguinte erro aconteceu -> ' . $e->getMessage()
             );
         }
-
+        
         return $dados;
     }
 
@@ -319,8 +336,8 @@ class M_mapa extends CI_Model
                 $codigo,"","","","","");
 
             if ($retornoConsulta['codigo'] == 1) {
-                $this->db->query("delete from tbl_mapa
-                                  where codigo = $codigo");
+                $this->db->query("UPDATE tbl_mapa SET estatus = 'D'
+                                  WHERE codigo = $codigo");
 
                 if ($this->db->affected_rows() > 0) {
                     $dados = array(
@@ -341,11 +358,12 @@ class M_mapa extends CI_Model
             }
         } catch (Exception $e) {
             $dados = array(
-                'codigo' => 00,
+                'codigo' => 0,
                 'msg' => 'ATENÇÃO: O seguinte erro aconteceu -> ' . $e->getMessage()
             );
         }
 
+        
         return $dados;
     }
 }

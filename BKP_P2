@@ -1,0 +1,1813 @@
+{
+	"log": {
+		"version": "1.2",
+		"creator": {
+			"name": "Insomnia REST Client",
+			"version": "insomnia.desktop.app:v12.5.0"
+		},
+		"entries": [
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 27.791,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost/ProjetoDSII/horario/inserir",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"2\",\n\t\"descricao\": \"tarde\",\n\t\"horaInicial\": \"13:00\",\n\t\"horaFinal\": \"18:00\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:16:03 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "72"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 72,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Hor\\u00e1rio cadastrado com sucesso.\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 27.791,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Inserir"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 29.127,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost/ProjetoDSII/horario/consultar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"\",\n\t\"descricao\": \"\",\n\t\"horaInicial\": \"\",\n\t\"horaFinal\": \"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 04:58:55 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "323"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 323,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Consulta realizada com sucesso.\",\"dados\":[{\"codigo\":\"1\",\"descricao\":\"Manha\",\"hora_ini\":\"07:00:00\",\"hora_fim\":\"12:00:00\",\"dtcria\":\"2026-05-12 02:15:44\",\"estatus\":\"\"},{\"codigo\":\"2\",\"descricao\":\"tarde\",\"hora_ini\":\"13:00:00\",\"hora_fim\":\"18:00:00\",\"dtcria\":\"2026-05-12 02:16:03\",\"estatus\":\"\"}]}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 29.127,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Consultar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 29.416,
+				"request": {
+					"method": "PUT",
+					"url": "http://localhost/ProjetoDSII/horario/alterar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"1\",\n\t\"descricao\": \"\",\n\t\"horaInicial\": \"07:00\",\n\t\"horaFinal\": \"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:17:02 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "70"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 70,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Hor\\u00e1rio alterado com sucesso.\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 29.416,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Alterar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 0,
+				"request": {
+					"method": "DELETE",
+					"url": "http://localhost/ProjetoDSII/horario/desativar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 0,
+					"statusText": "",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [],
+					"content": {
+						"size": 0,
+						"mimeType": ""
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 0,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Desativar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 54.309999999999995,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost/ProjetoDSII/mapa/inserir",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"dataReserva\": \"2026-05-28\",\n\t\"codSala\": \"1\",\n\t\"codTurma\": \"1\",\n\t\"codProfessor\": \"1\",\n\t\"codHorario\": \"1\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 05:04:41 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "67"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 67,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Reserva cadastrada corretamente\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 54.309999999999995,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Inserir"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 33.486000000000004,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost/ProjetoDSII/Mapa/consultar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"\",\n\t\"dataReserva\": \"\",\n\t\"codSala\": \"\",\n\t\"codHorario\": \"\",\n\t\"codTurma\": \"\",\n\t\"codProfessor\": \"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 05:50:22 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "318"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 318,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Consulta efetuada com sucesso.\",\"dados\":[{\"codigo\":\"3\",\"datareservabra\":\"10-09-2026\",\"datareserva\":\"2026-09-10\",\"sala\":\"3\",\"descsala\":\"Sala 3\",\"codigo_horario\":\"1\",\"deshorario\":\"Manha\",\"codigo_turma\":\"1\",\"descturma\":\"Teste 1\",\"codigo_professor\":\"1\",\"nome_professor\":\"Amauri Carlos\"}]}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 33.486000000000004,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Consultar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 33.855999999999995,
+				"request": {
+					"method": "PUT",
+					"url": "http://localhost/ProjetoDSII/Mapa/alterar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\":\"3\",\n\t\"dataReserva\":\"\",\n\t\"codSala\":\"3\",\n\t\"codHorario\":\"\",\n\t\"codTurma\":\"\",\n\t\"codProfessor\":\"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 05:36:41 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "70"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 70,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Agendamento alterado corretamente.\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 33.855999999999995,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Alterar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 50.489,
+				"request": {
+					"method": "DELETE",
+					"url": "http://localhost/ProjetoDSII/Mapa/desativar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\":\"2\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 05:50:19 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "72"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 72,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Agendamento DESATIVADO corretamente.\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 50.489,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Desativar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 27.047,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost/ProjetoDSII/professor/inserir",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"2\",\n\t\"nome\": \"Amauri JR\",\n\t\"cpf\":\"82926867891\",\n\t\"tipo\": \"Publico\"\n\t\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:11:45 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "69"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 69,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Professor cadastrado corretamente\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 27.047,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Inserir"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 38.933,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost/ProjetoDSII/professor/consultar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"\",\n\t\"nome\": \"\",\n\t\"cpf\":\"\",\n\t\"tipo\": \"\"\n\t\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:14:14 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "189"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 189,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Consulta efetuada com sucesso!\",\"dados\":[{\"codigo\":\"1\",\"nome\":\"Amauri Carlos\",\"cpf\":\"48991569870\",\"tipo\":\"p\",\"dtcria\":\"2026-05-12 02:11:09\",\"estatus\":\"\"}]}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 38.933,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Consultar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 0,
+				"request": {
+					"method": "PUT",
+					"url": "",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "",
+						"text": ""
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 0,
+					"statusText": "",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [],
+					"content": {
+						"size": 0,
+						"mimeType": ""
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 0,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Alterar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 55.813,
+				"request": {
+					"method": "DELETE",
+					"url": "http://localhost/ProjetoDSII/professor/desativar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"2\"\n\t\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:14:10 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "70"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 70,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Professor desativado corretamente!\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 55.813,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Desativar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 34.965999999999994,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost/ProjetoDSII/usuario/inserir",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"nome\": \"amauriJR\",\n\t\"email\":\"amauricarlos@hotmail\",\n\t\"usuario\": \"amauricc\",\n\t\"senha\": \"123\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:26:06 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "56"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 56,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Usu\\u00e1rio correto\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 34.965999999999994,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Inserir"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 26.859,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost/ProjetoDSII/usuario/logar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"usuario\": \"amauric\",\n\t\"senha\": \"123\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:34:01 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "56"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 56,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Usu\\u00e1rio correto\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 26.859,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Login"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 26.297,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost/ProjetoDSII/usuario/consultar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"nome\": \"\",\n\t\"email\": \"\",\n\t\"usuario\":\"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:35:17 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "160"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 160,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Consulta efetuada com sucesso.\",\"dados\":[{\"id_usuario\":\"1\",\"nome\":\"amauri\",\"usuario\":\"amauric\",\"email\":\"amauricarlos@gmail\"}]}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 26.297,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Consultar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 38.339,
+				"request": {
+					"method": "PUT",
+					"url": "http://localhost/ProjetoDSII/usuario/alterar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"idUsuario\": \"1\",\n\t\"nome\": \"amauriJR\",\n\t\"email\":\"amauricarlo@shotmail\",\n\t\"senha\": \"123\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:29:53 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "97"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 97,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":false,\"erros\":[{\"codigo\":97,\"campo\":\"E-mail\",\"msg\":\"Tipo de dado n\\u00e3o definido\"}]}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 38.339,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Alterar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 38.361,
+				"request": {
+					"method": "DELETE",
+					"url": "http://localhost/ProjetoDSII/usuario/desativar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"idUsuario\": \"2\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 12 May 2026 05:35:13 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "73"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 73,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Usu\\u00e1rio DESATIVADO corretamente.\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 38.361,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Desativar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 50.136,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost/ProjetoDSII/Turma/inserir",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": 2,\n\t\"descricao\": \"Turma B\",\n\t\"capacidade\":20,\n\t\"dataInicio\": \"2026-02-01\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 06:14:30 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "65"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 65,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Turma cadastrada corretamente\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 50.136,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Inserir"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 28.648,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost/ProjetoDSII/Turma/consultar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"\",\n\t\"descricao\": \"\",\n\t\"capacidade\": \"\",\n\t\"dataInicio\": \"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 06:14:56 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "301"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 301,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Consulta efetuada com sucesso\",\"dados\":[{\"codigo\":\"1\",\"descricao\":\"Turma A\",\"capacidade\":\"20\",\"dataInicio\":\"2026-02-01\",\"dataInicioObra\":\"01\\/02\\/2026\"},{\"codigo\":\"3\",\"descricao\":\"Turma C\",\"capacidade\":\"20\",\"dataInicio\":\"2026-02-01\",\"dataInicioObra\":\"01\\/02\\/2026\"}]}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 28.648,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Consultar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 28.753999999999998,
+				"request": {
+					"method": "PUT",
+					"url": "http://localhost/ProjetoDSII/Turma/alterar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"3\",\n\t\"descricao\": \"Turma C\",\n\t\"capacidade\": \"\",\n\t\"dataInicio\": \"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 06:14:16 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "63"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 63,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Turma alterada corretamente\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 28.753999999999998,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Alterar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 29.601,
+				"request": {
+					"method": "DELETE",
+					"url": "http://localhost/ProjetoDSII/Turma/desativar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": 2\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 06:14:53 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "66"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 66,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Turma desativada corretamente!\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 29.601,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Desativar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 29.945,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost/ProjetoDSII/Sala/inserir",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"3\",\n\t\"descricao\": \"Sala 2\",\n\t\"andar\": 2,\n\t\"capacidade\": 25\n}\n"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 06:03:28 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "79"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 79,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":false,\"erros\":[{\"codigo\":10,\"msg\":\"Sala ja cadastrada no sistema\"}]}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 29.945,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Inserir"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 38.136,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost/ProjetoDSII/Sala/consultar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"\",\n\t\"descricao\": \"\",\n\t\"andar\": \"\",\n\t\"capacidade\": \"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 05:53:51 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "307"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 307,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Consulta efetuada com sucesso!\",\"dados\":[{\"codigo\":\"1\",\"descricao\":\"Sala 1\",\"andar\":\"1\",\"capacidade\":\"20\",\"dtcria\":\"2026-05-19 02:52:32\",\"estatus\":\"\"},{\"codigo\":\"3\",\"descricao\":\"Sala 3 - alterada\",\"andar\":\"2\",\"capacidade\":\"25\",\"dtcria\":\"2026-05-19 02:53:08\",\"estatus\":\"\"}]}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 38.136,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Consultar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 47.204,
+				"request": {
+					"method": "PUT",
+					"url": "http://localhost/ProjetoDSII/Sala/alterar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"3\",\n\t\"descricao\": \"S - alterada\",\n\t\"andar\": \"\",\n\t\"capacidade\": \"\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 05:53:36 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "64"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 64,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Sala atualizada corretamente\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 47.204,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Alterar"
+			},
+			{
+				"startedDateTime": "2026-05-19T06:18:10.408Z",
+				"time": 42.736999999999995,
+				"request": {
+					"method": "DELETE",
+					"url": "http://localhost/ProjetoDSII/Sala/desativar",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "User-Agent",
+							"value": "insomnia/12.5.0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"codigo\": \"2\"\n}"
+					},
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Date",
+							"value": "Tue, 19 May 2026 05:53:46 GMT"
+						},
+						{
+							"name": "Server",
+							"value": "Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12"
+						},
+						{
+							"name": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"name": "Content-Length",
+							"value": "65"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"content": {
+						"size": 65,
+						"mimeType": "text/html; charset=UTF-8",
+						"text": "{\"sucesso\":true,\"codigo\":1,\"msg\":\"Sala Desativada corretamente!\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 42.736999999999995,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Desativar"
+			}
+		]
+	}
+}

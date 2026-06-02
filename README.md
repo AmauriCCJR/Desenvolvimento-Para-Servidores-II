@@ -2,4 +2,4 @@
 Repositório para arquivos das aulas de Desenvolvimento para Servidores II da Fatec de São Roque
 
 ## CRUD
-	*Utilizando CodeIgniter 3
+	* Utilizando CodeIgniter 3

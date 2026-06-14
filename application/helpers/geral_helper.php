@@ -9,22 +9,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 function verificarParametro($atributo, $lista)
 {
-    // Inicializa o status como válido
-    
-    
-    // Itera sobre cada item esperado na lista
+    // Verifica se o objeto é nulo ou não é um objeto
+    if (is_null($atributo) || !is_object($atributo)) {
+        return 0;
+    }
+
     foreach ($lista as $key => $value) {
-        // Verifica se cada chave existe como propriedade do objeto
         if (array_key_exists($key, get_object_vars($atributo))) {
             $estatus = 1;
         } else {
-            // Se alguma chave não existir, marca como inválido
             $estatus = 0;
             break;
         }
     }
 
-    // Verifica se a quantidade de atributos do objeto é igual à esperada
     if (count(get_object_vars($atributo)) != count($lista)) {
         $estatus = 0;
     }

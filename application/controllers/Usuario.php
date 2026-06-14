@@ -420,7 +420,7 @@ class Usuario extends CI_Controller {
             }
         } catch (Exception $e) {
             $retorno = array('codigo' => 0,
-                             'msg'    => 'ATENÇÃO: O seguinte erro aconteceu -> ',$e->getMessage());
+                             'msg'    => 'ATENÇÃO: O seguinte erro aconteceu -> '.$e->getMessage());
         }
 
         if ($sucesso == true) {
@@ -429,7 +429,7 @@ class Usuario extends CI_Controller {
         } else {
             $retorno = ['sucesso' => $sucesso, 'erros' => $erros];
         }
-
+        header('Content-Type: application/json');
         echo json_encode($retorno);
     }
 }

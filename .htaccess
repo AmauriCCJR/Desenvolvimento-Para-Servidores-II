@@ -1,4 +1,10 @@
 RewriteEngine On
+RewriteBase /Desenvolvimento-Para-Servidores-II/
+
+# Libera requisições OPTIONS (preflight CORS)
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /ProjetoDSII/index.php/$1 [L] 
+RewriteRule ^(.*)$ index.php/$1 [L]

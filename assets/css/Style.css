@@ -1,0 +1,189 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1C1C1C;
+}
+
+main {
+    margin-top: 130px;
+    /* Ajuste conforme a altura do seu header */
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+
+}
+
+
+header {
+    background-color: #4F4F4F;
+    padding: 0px;
+    box-shadow: 0 4px 2px -2px gray;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    z-index: 1000;
+}
+
+#headerTitle {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: #D3D3D3;
+}
+
+a {
+    text-decoration: none;
+    color: #1C1C1C;
+}
+
+
+.secao4 {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+}
+
+.secao4-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+}
+
+.secao4-div-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(90% / 3 - 50px);
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 16px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    background-color: #C0C0C0;
+    transition: all 0.5s ease;
+}
+
+.card {
+    transition: all 0.5s ease;
+    height: 9rem;
+}
+
+.card p{
+    padding: 2px;
+    font-size: 14px;
+    color: #363636;
+    line-height: 1.5;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.secao4-div-card:hover,
+a:hover,
+.card:hover {
+    transform: scale(1.1);
+    z-index: 1;
+    background-color: #363636;
+    color: #f7941d;
+}
+
+
+.secao4-div-card img {
+    width: 20%;
+    height: auto;
+}
+
+.secao4-div-card h3 {
+    margin-bottom: 0px;
+}
+
+.secao4-div-card:hover h3 {
+    transform: scale(1.5);
+    transition: transform 0.4s ease;
+}
+
+.card {
+    position: relative;
+    background-color: #A9A9A9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    height: 220px;
+    width: 280px;
+}
+
+.card::before,
+a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 100%;
+    background-color: #f7941d;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+
+#linkHome::before{
+    background-color: #1C1C1C;
+}
+
+.card h2 {
+    font-size: 20px;
+    color: #363636;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #363636;
+    line-height: 1.5;
+}
+.logo_login{
+    max-width: 200px;
+}
+
+/* Estilos para dispositivos móveis */
+@media (max-width: 768px) {
+    .secao4-div-card {
+        width: 100%;
+        background-color: #363636;
+    }
+
+    .card {
+        margin: 10px;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+
+    .card h2 {
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 10px;
+    }
+}

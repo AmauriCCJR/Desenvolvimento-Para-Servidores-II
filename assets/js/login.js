@@ -1,3 +1,4 @@
+//Login
 async function validaLogin() {
     event.preventDefault();
 
@@ -40,3 +41,5 @@ tooglePassword.addEventListener('click', function() {
     passwordField.type = type;
     this.classList.toggle('fa-eye-slash');
 });
+
+

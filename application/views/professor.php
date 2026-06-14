@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <?php include '../../htdocs/Desenvolvimento-Para-Servidores-II/assets/includes/head.php'; ?>
+    <link rel="stylesheet" href="../../Desenvolvimento-Para-Servidores-II/assets/css/professor.css">
+    <title>Professor</title>
+</head>
+
+<body>
+    <header>
+        <div id="headerMenu">
+            <a href="../Funcoes/indexPagina">
+                <h1 id="headerTitle">Mapeamento de Salas</h1>
+            </a>
+
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="../funcoes/abreSala">Sala de Aula</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../funcoes/abreProfessor">Docente</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../funcoes/abreTurma">Turma</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../funcoes/abrePeriodo">Periodo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../funcoes/abreMapa">Reservas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../funcoes/abreRelatorio">Relatorio</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+    <main>
+        <section class="secao4" id="cadastroProfessor">
+            <div id="btnCadastroModal">
+                <input type="text" id="inputPesquisa" class="form-control" placeholder="Pesquisar" onkeyup="filtrarTabela()">
+                <button class="btn btn-outline-primary btnAcao modalBtn" id="botaoModal" type="button" data-bs-toggle="modal" data-bs-target="#cadastroProfessorModal">Cadastrar novo docente</button>
+            </div>
+
+            <div class="modal fade" id="cadastroProfessorModal" tabindex="-1" role="dialog" aria-labelledby="cadastroProfessorModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cadastroProfessorModalLabel">Cadastrar Novo Docente</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form id="formCadastroProfessor" method="post" class="modal-content">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="nome">Nome</label>
+                                    <input type="text" id="nome" name="nome" class="form-control" required>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="cpf" class="col-form-label">CPF</label>
+                                        <input type="number" id="cpf" name="cpf" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="tipo" class="col-form-label">Tipo</label>
+                                    <select name="tipo" id="tipo" class="form-control" required>
+                                        <option value="">Selecione</option>
+                                        <option value="F">Funcionário</option>
+                                        <option value="C">Carta Convite</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btnAcao" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btnAcao" onclick="cadastro();">Cadastrar</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Editar Docente</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="formEditProfessor" method="post">
+                            <div class="modal-body">
+                                <input type="hidden" id="editId" name="editId">
+                                <div class="form-group">
+                                    <label for="editNome">Nome</label>
+                                    <input type="text" id="editNome" name="editNome" class="form-control" required>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="editCpf" class="col-form-label">CPF</label>
+                                        <input type="number" id="editCpf" name="editCpf" class="form-control" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="editTipo" class="col-form-label">Tipo</label>
+                                        <select name="editTipo" id="editTipo" class="form-control" required>
+                                            <option value="">Selecione</option>
+                                            <option value="F">Funcionario</option>
+                                            <option value="C">Carta Convite</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btnAcao" data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btnAcao" onclick="editarProfessor();">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="mostrarCadastro">
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>Docente</th>
+                            <th>CPF</th>
+                            <th>Tipo</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="conteudo-professor">
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+
+
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../assets/js/professor.js" defer></script>

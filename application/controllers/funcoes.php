@@ -32,5 +32,9 @@ public function abreTurma(){
 public function abrePeriodo(){
     $this->load->view('periodo');
 }
+
+public function abreMapa(){
+    $this->load->view('reserva');
+}
 }
 ?>

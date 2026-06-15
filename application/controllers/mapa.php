@@ -29,6 +29,8 @@ class Mapa extends CI_Controller
     private $diaSemana;
 
 
+   
+
     // Getters e Setters
 
     public function getCodigo()
@@ -214,9 +216,11 @@ class Mapa extends CI_Controller
                     $resBanco = $this->M_mapa->inserir(
                         $this->getDataReserva(),
                         $this->getCodigoSala(),
-                        $this->getCodigoHorario(),
                         $this->getCodigoTurma(),
-                        $this->getCodigoProfessor()
+                        $this->getCodigoProfessor(),
+                        $this->getCodigoHorario(),
+                        
+                        
                     );
 
                     if ($resBanco['codigo'] == 1) {

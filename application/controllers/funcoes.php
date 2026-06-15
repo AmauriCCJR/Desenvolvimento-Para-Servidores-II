@@ -28,5 +28,9 @@ public function abreProfessor(){
 public function abreTurma(){
     $this->load->view('turma');
 }
+
+public function abrePeriodo(){
+    $this->load->view('periodo');
+}
 }
 ?>

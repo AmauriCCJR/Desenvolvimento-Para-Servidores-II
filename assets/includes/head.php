@@ -7,5 +7,6 @@
 <link rel="stylesheet" href="../../Desenvolvimento-Para-Servidores-II/assets/css/stylePassword.css">
 <link rel="stylesheet" href="../../Desenvolvimento-Para-Servidores-II/assets/css/Style.css">
 <link rel="icon" href="../../Desenvolvimento-Para-Servidores-II/assets/img/icone_fatecSR.ico" type="image/x-icon">
+<script src="../../Desenvolvimento-Para-Servidores-II/assets/js/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

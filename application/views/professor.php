@@ -36,9 +36,8 @@
                 </table>
             </div>
         </section>
-    </main>
+   
 
-    <!-- Modal Cadastro -->
     <div class="modal fade" id="cadastroProfessorModal" tabindex="-1" role="dialog" aria-labelledby="cadastroProfessorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -80,7 +79,6 @@
         </div>
     </div>
 
-    <!-- Modal Editar -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -118,7 +116,7 @@
             </div>
         </div>
     </div>
-
+ </main>
 
 
     <script src="../assets/js/professor.js"></script>

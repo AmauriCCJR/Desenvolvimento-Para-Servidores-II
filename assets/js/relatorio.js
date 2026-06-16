@@ -5,7 +5,7 @@ async function gerarRelatorio() {
             Swal.fire('Erro', 'Por favor, informe uma data.', 'error');
             return;
         }
-        const response = await fetch('../Relatorio/gerarMapa', {
+        const response = await fetch('../Relatorio/gerarMapaNovo', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ function preencherTabela(dados) {
         linha.insertCell(1).innerText = reserva.desc_codigo + " - " + reserva.desc_sala;
         linha.insertCell(2).innerText = reserva.desc_turma;
         linha.insertCell(3).innerText = reserva.nome_professor;
-        linha.insertCell(4).innerText = reserva.desc_pedido;
+        linha.insertCell(4).innerText = reserva.desc_periodo;
         linha.insertCell(5).innerText = " ";
         linha.insertCell(6).innerText = " ";
         linha.insertCell(7).innerText = " ";
@@ -152,7 +152,7 @@ function imprimirRelatorioTV() {
             top: 60px;
             width: 100%;
         }
-    }
+    
     </style>`;
 
     let conteudo = `
@@ -174,7 +174,7 @@ function imprimirRelatorioTV() {
         let horario = dadosTabela[i].cells[4].innerText;
 
 
-        let andar = parseInt(sala.match(/\d+/)[0].charAt[0]) || 0;
+        let andar = parseInt(sala.match(/\d+/)[0].charAt(0)) || 0;
         andar = andar > 6 ? 6 : andar;
 
         let periodo = 'manha';
@@ -194,9 +194,9 @@ function imprimirRelatorioTV() {
         conteudo += `
         <div class="card floor-${dado.andar}" data-periodo="${dado.periodo}">
             <div>Sala: ${dado.sala}</div>
-            <div>Sala: ${dado.turma}</div>
-            <div>Sala: ${dado.professor}</div>
-            <div>Sala: ${dado.horario}</div>
+            <div>Turma: ${dado.turma}</div>
+            <div>Professor: ${dado.professor}</div>
+            <div>Horario: ${dado.horario}</div>
         </div>
     `;
     });

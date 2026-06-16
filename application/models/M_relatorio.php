@@ -9,7 +9,7 @@ class M_relatorio extends CI_Model
     {
 
         try {
-            $sql = "SELECT DATE_FORMAT(m.datareserva, '%d-%m-%Y) AS datareserva,
+            $sql = "SELECT DATE_FORMAT(m.datareserva, '%d-%m-%Y') AS datareserva,
     s.descricao AS desc_sala,
     s.codigo as desc_codigo,
     h.descricao as desc_periodo,

@@ -13,11 +13,11 @@
     <main>
         <div id="conteudoPrincipal">
             <div class="container mt-4">
-                <h2 style="color: #C0C0C0;">Relatório de Reservas</h2>
+                <h2 style="color: #000;">Relatório de Reservas</h2>
 
                 <div class="row align-items-end g-3">
                     <div class="col-auto">
-                        <label for="dataRelatorio" style="color: #C0C0C0;">Data da Reserva:</label>
+                        <label for="dataRelatorio" style="color: #000;">Data da Reserva:</label>
                         <input type="date" id="dataRelatorio" class="form-control">
                     </div>
                     <div class="col-auto d-flex flex-wrap gap-2">
@@ -29,22 +29,23 @@
                 </div>
 
                 <hr>
-
-                <table class="table table-bordered mt-3" id="tabelaRelatorio">
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Sala</th>
-                            <th>Turma</th>
-                            <th>Docente</th>
-                            <th>Horário</th>
-                            <th>Retirada</th>
-                            <th>Entrega</th>
-                            <th>Visto</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered mt-3" id="tabelaRelatorio">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Sala</th>
+                                <th>Turma</th>
+                                <th>Docente</th>
+                                <th>Horário</th>
+                                <th>Retirada</th>
+                                <th>Entrega</th>
+                                <th>Visto</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -56,4 +57,5 @@
 
 </body>
 <script src="../assets/js/relatorio.js"></script>
+
 </html>

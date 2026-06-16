@@ -1,4 +1,4 @@
-async function cadastro() {
+async function cadastro(event) {
     event.preventDefault();
 
     try {
@@ -9,7 +9,8 @@ async function cadastro() {
         const dataReserva = document.getElementById('dataFim').value;
 
         const response = await fetch('../Mapa/inserir', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 codSala: sala,
                 codHorario: horario,
@@ -19,7 +20,8 @@ async function cadastro() {
             })
         });
         const result = await response.json();
-        console.log('Dados: ', result)
+        console.log('Dados: ', result);
+
         if (result.sucesso) {
             $('#cadastroMapeamentoModal').modal('hide');
             Swal.fire('Sucesso!', result.msg, 'success');
@@ -45,10 +47,12 @@ async function cadastro() {
 
 const spinner = document.getElementById('spinner');
 
-
+// Função para Carregar os Dados na Tabela
 async function carregarDados() {
     try {
         spinner.style.display = 'block';
+
+        // Enviando filtros vazios para trazer todos os dados do mapa
         const response = await fetch('../Mapa/consultar', {
             method: 'POST',
             headers: {
@@ -62,22 +66,23 @@ async function carregarDados() {
                 dataReserva: ''
             })
         });
+
         const data = await response.json();
         const conteudoAcesso = document.getElementById('conteudo-Mapeamento');
 
         conteudoAcesso.innerHTML = '';
 
         if (!data.sucesso || !data.dados || data.dados.length === 0) {
-            conteudoAcesso.innerHTML = '<tr><td colspan="5">Nenhum registro encontrado.</td></tr>';
+            conteudoAcesso.innerHTML = '<tr><td colspan="7" class="text-center">Nenhum registro encontrado.</td></tr>';
             return;
         }
 
-        if (data && Array.isArray(data.dados) && data.dados.length > 0) {
-            data.dados.forEach(item => {
-                const fragmento = document.createDocumentFragment();
-                const linha = document.createElement('tr');
-                linha.classList.add('alert', 'alert-warning');
-                linha.innerHTML = `
+        const fragmento = document.createDocumentFragment();
+
+        data.dados.forEach(item => {
+            const linha = document.createElement('tr');
+            linha.classList.add('alert', 'alert-warning');
+            linha.innerHTML = `
                 <td style="display:none"><input type="checkbox" class="selecionar-item" value="${item.codigo}"></td>
                 <td>${item.sala}</td>
                 <td>${item.descsala}</td>
@@ -90,25 +95,20 @@ async function carregarDados() {
                 <td>${item.deschorario}</td>
                 <td style="display: none">${item.codigo_horario}</td>
                 <td>
-                    <div class="row">
-                        <div id="btnEditModal" style="display: flex; gap: 10px; align-items: center;">
+                    <div style="display: flex; gap: 10px; align-items: center;">
                         <button class="btn btn-warning btnAcao" onclick="openEditModal(this, ${item.codigo})">
                             <i class="fas fa-pencil"></i>
                         </button>
+                        <button class="btn btn-danger btnAcao btnAcaoExcluir" onclick="deletarMapeamento(${item.codigo})">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
-
-                    <button class="btn btn-danger btnAcao btnAcaoExcluir" onclick="deletarMapeamento(${item.codigo})">
-                    <i class="fas fa-trash"></i>
-                    </button>
-                </div>
                 </td>`;
-                fragmento.appendChild(linha);
-            });
+            fragmento.appendChild(linha);
+        });
 
-            conteudoAcesso.appendChild(fragmento);
-        } else {
-            conteudoAcesso.innerHTML = '<tr><td colspan="10">Nenhum dado encontrado</td></tr>';
-        }
+        conteudoAcesso.appendChild(fragmento);
+
     } catch (error) {
         console.error('Erro ao carregar os dados: ', error);
     } finally {
@@ -116,10 +116,10 @@ async function carregarDados() {
     }
 }
 
-function debounce(func, delay){
+// Debounce para pesquisa
+function debounce(func, delay) {
     let timer;
-
-    return(...args) => {
+    return (...args) => {
         clearTimeout(timer);
         timer = setTimeout(() => func(...args), delay);
     };
@@ -127,15 +127,7 @@ function debounce(func, delay){
 
 const carregarDadosDebounced = debounce(carregarDados, 300);
 
-$(document).ready(function () {
-    carregarDados();
-
-    $('#cadastroMapeamentoModal').on('show.bs.modal', function () {
-        $('#formCadastroMapeamento')[0].reset();
-    });
-});
-
-
+// Abrir Modal de Edição preenchendo os campos
 function openEditModal(button, codigo) {
     const row = button.closest('tr');
 
@@ -144,9 +136,8 @@ function openEditModal(button, codigo) {
     const professor = row.cells[6].innerText;
     const dataMapeamento = row.cells[8].innerText;
     const horario = row.cells[10].innerText;
-    
-    document.getElementById('editId').value = codigo;
 
+    document.getElementById('editId').value = codigo;
     document.getElementById('editSelectSalas').value = sala;
     document.getElementById('editSelectTurma').value = turma;
     document.getElementById('editSelectProfessor').value = professor;
@@ -156,7 +147,8 @@ function openEditModal(button, codigo) {
     $('#editModal').modal('show');
 }
 
-async function editarMapeamento() {
+// Salvar Edição
+async function editarMapeamento(event) {
     event.preventDefault();
 
     try {
@@ -168,13 +160,15 @@ async function editarMapeamento() {
         const horario = document.getElementById('editSelectHorario').value;
 
         const response = await fetch('../Mapa/alterar', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
                 codigo: codigo,
                 codSala: sala,
                 codHorario: horario,
                 codTurma: turma,
                 codProfessor: professor,
-                dataReserva: dataMapeamento
+                dataReserva: dataMapeamento // Corrigido aqui
             })
         });
 
@@ -198,12 +192,12 @@ async function editarMapeamento() {
         }
 
     } catch (error) {
-        console.error('Erro ao editar o reserva: ', error);
+        console.error('Erro ao editar a reserva: ', error);
         Swal.fire('Erro', 'Ocorreu um erro ao processar a requisição.', 'error');
     }
 }
 
-
+// Deletar múltiplos
 async function deletarMapeamentoMultiplos(codigo) {
     Swal.fire({
         title: 'Atenção!',
@@ -212,11 +206,8 @@ async function deletarMapeamentoMultiplos(codigo) {
         showConfirmButton: true,
         showCancelButton: true,
         customClass: {
-            popup: 'my-swal-popup',
-            title: 'my-swal-title',
-            html: 'my-swal-text',
-            confirmButton: 'btn btn-danger btnAcao my-swal-button',
-            cancelButton: 'btn btn-secondary btnAcao my-swal-button'
+            confirmButton: 'btn btn-danger btnAcao',
+            cancelButton: 'btn btn-secondary btnAcao'
         },
         buttonsStyling: false,
     }).then(async function (res) {
@@ -224,9 +215,7 @@ async function deletarMapeamentoMultiplos(codigo) {
             const config = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    codigo: codigo
-                })
+                body: JSON.stringify({ codigo: codigo })
             };
             const request = await fetch('../Mapa/desativarMultiplos', config);
             const response = await request.json();
@@ -235,12 +224,7 @@ async function deletarMapeamentoMultiplos(codigo) {
                 title: 'Atenção!',
                 text: response.msg,
                 icon: response.sucesso ? 'success' : 'error',
-                customClass: {
-                    popup: 'my-swal-popup',
-                    title: 'my-swal-title',
-                    html: 'my-swal-text',
-                    confirmButton: 'btn btn-primary btnAcao'
-                },
+                customClass: { confirmButton: 'btn btn-primary btnAcao' },
                 buttonsStyling: false
             });
             carregarDados();
@@ -248,8 +232,7 @@ async function deletarMapeamentoMultiplos(codigo) {
     });
 }
 
-
-
+// Deletar um único registro
 async function deletarMapeamento(codigo) {
     Swal.fire({
         title: 'Atenção!',
@@ -258,11 +241,8 @@ async function deletarMapeamento(codigo) {
         showConfirmButton: true,
         showCancelButton: true,
         customClass: {
-            popup: 'my-swal-popup',
-            title: 'my-swal-title',
-            html: 'my-swal-text',
-            confirmButton: 'btn btn-danger btnAcao my-swal-button',
-            cancelButton: 'btn btn-secondary btnAcao my-swal-button'
+            confirmButton: 'btn btn-danger btnAcao',
+            cancelButton: 'btn btn-secondary btnAcao'
         },
         buttonsStyling: false,
     }).then(async function (res) {
@@ -270,9 +250,7 @@ async function deletarMapeamento(codigo) {
             const config = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    codigo: codigo
-                })
+                body: JSON.stringify({ codigo: codigo })
             };
             const request = await fetch('../Mapa/desativar', config);
             const response = await request.json();
@@ -281,12 +259,7 @@ async function deletarMapeamento(codigo) {
                 title: 'Atenção!',
                 text: response.msg,
                 icon: response.sucesso ? 'success' : 'error',
-                customClass: {
-                    popup: 'my-swal-popup',
-                    title: 'my-swal-title',
-                    html: 'my-swal-text',
-                    confirmButton: 'btn btn-primary btnAcao'
-                },
+                customClass: { confirmButton: 'btn btn-primary btnAcao' },
                 buttonsStyling: false
             });
             carregarDados();
@@ -294,260 +267,113 @@ async function deletarMapeamento(codigo) {
     });
 }
 
-
+// Filtro local na tabela
 function filtrarTabela() {
     const input = document.getElementById('inputPesquisa');
     const filter = input.value.toLowerCase();
     const tabela = document.getElementById('conteudo-Mapeamento');
     const linhas = tabela.getElementsByTagName('tr');
 
-    for (let linha of linhas){
+    for (let linha of linhas) {
         const celulas = linha.getElementsByTagName("td");
 
-        if (celulas.length > 0 ){
+        if (celulas.length > 0) {
             const conteudoLinha = Array.from(celulas)
-            .map(celula => celula.textContent.trim().toLowerCase()).join(" ");
+                .map(celula => celula.textContent.trim().toLowerCase()).join(" ");
 
-            linha.style.display = conteudoLinha.includes(filter)? "" : "none";
+            linha.style.display = conteudoLinha.includes(filter) ? "" : "none";
         }
     }
 }
 
-$(document).ready(function(){
-    //Faz a requisição para listas as salas
+// Execuções do Document Ready (Cargas de selects base)
+$(document).ready(function () {
+    carregarDados();
+
+    $('#cadastroMapeamentoModal').on('show.bs.modal', function () {
+        $('#formCadastroMapeamento')[0].reset();
+    });
+
+    // Escuta do envio do formulário de cadastro
+    $('#formCadastroMapeamento').on('submit', function (e) {
+        cadastro(e);
+    });
+
+    // Escuta do envio do formulário de edição
+    $('#formEditMapeamento').on('submit', function (e) {
+        editarMapeamento(e);
+    });
+
+    // Requisições AJAX de listagem para os Selects...
+    // Salas
     $.ajax({
         url: '../Sala/consultar',
         method: "POST",
         dataType: 'json',
         contentType: 'application/json',
-        data: JSON.stringify({
-            codigo: '',
-            descricao: '',
-            andar: '',
-            capacidade: ''
-        }),
-        success: function(retorno){
-            if(retorno.codigo==1){
-                $.each(retorno.dados, function(index, item){
-                    $('#selectSalas').append($('<option>', {
-                        value: item.codigo,
-                        text: item.codigo + " - " + item.descricao
-                    }));
+        data: JSON.stringify({ codigo: '', descricao: '', andar: '', capacidade: '' }),
+        success: function (retorno) {
+            if (retorno.codigo == 1) {
+                $.each(retorno.dados, function (index, item) {
+                    const option = $('<option>', { value: item.codigo, text: item.codigo + " - " + item.descricao });
+                    $('#selectSalas').append(option.clone());
+                    $('#editSelectSalas').append(option);
                 });
-            } else {
-                $('#selectSalas').append('<option value="">Nenhuma Sala cadastrada</option>');
             }
-        }, error: function(){
-            alert('Erro ao carregar as salas');
         }
     });
 
-
-    //Faz a requisição para listas as salas em edição
-    $.ajax({
-        url: '../Sala/consultar',
-        method: "POST",
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            codigo: '',
-            descricao: '',
-            andar: '',
-            capacidade: ''
-        }),
-        success: function(retorno){
-            if(retorno.codigo==1){
-                $.each(retorno.dados, function(index, item){
-                    $('#editSelectSalas').append($('<option>', {
-                        value: item.codigo,
-                        text: item.codigo + " - " + item.descricao
-                    }));
-                });
-            } else {
-                $('#editSelectSalas').append('<option value="">Nenhuma Sala cadastrada</option>');
-            }
-        }, error: function(){
-            alert('Erro ao carregar as salas');
-        }
-    });
-
-
-
-       //Faz a requisição para listas os professores
+    // Professores
     $.ajax({
         url: '../Professor/consultar',
         method: "POST",
         dataType: 'json',
         contentType: 'application/json',
-        data: JSON.stringify({
-            codigo: '',
-            nome: '',
-            cpf: '',
-            tipo: ''
-        }),
-        success: function(retorno){
-            if(retorno.codigo==1){
-                $.each(retorno.dados, function(index, item){
-                    $('#selectProfessor').append($('<option>', {
-                        value: item.codigo,
-                        text: item.nome + " - " + item.descricao
-                    }));
+        data: JSON.stringify({ codigo: '', nome: '', cpf: '', tipo: '' }),
+        success: function (retorno) {
+            if (retorno.codigo == 1) {
+                $.each(retorno.dados, function (index, item) {
+                    const option = $('<option>', { value: item.codigo, text: item.nome });
+                    $('#selectProfessor').append(option.clone());
+                    $('#editSelectProfessor').append(option);
                 });
-            } else {
-                $('#selectProfessor').append('<option value="">Nenhuma professor cadastrado</option>');
             }
-        }, error: function(){
-            alert('Erro ao carregar as Professores');
         }
     });
 
-
-    //Faz a requisição para listas os professores editados
-    $.ajax({
-        url: '../Professor/consultar',
-        method: "POST",
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            codigo: '',
-            nome: '',
-            cpf: '',
-            tipo: ''
-        }),
-        success: function(retorno){
-            if(retorno.codigo==1){
-                $.each(retorno.dados, function(index, item){
-                    $('#editSelectProfessor').append($('<option>', {
-                        value: item.codigo,
-                        text: item.nome + " - " + item.descricao
-                    }));
-                });
-            } else {
-                $('#editSelectProfessor').append('<option value="">Nenhuma professor cadastrado</option>');
-            }
-        }, error: function(){
-            alert('Erro ao carregar os Professores');
-        }
-    });
-
-
-
-       //Faz a requisição para listas as turmas
+    // Turmas
     $.ajax({
         url: '../Turma/consultar',
         method: "POST",
         dataType: 'json',
         contentType: 'application/json',
-        data: JSON.stringify({
-            codigo: '',
-            descricao: '',
-            capacidade: '',
-            dataInicio: ''
-        }),
-        success: function(retorno){
-            if(retorno.codigo==1){
-                $.each(retorno.dados, function(index, item){
-                    $('#selectTurma').append($('<option>', {
-                        value: item.codigo,
-                        text: item.descricao
-                    }));
+        data: JSON.stringify({ codigo: '', descricao: '', capacidade: '', dataInicio: '' }),
+        success: function (retorno) {
+            if (retorno.codigo == 1) {
+                $.each(retorno.dados, function (index, item) {
+                    const option = $('<option>', { value: item.codigo, text: item.descricao });
+                    $('#selectTurma').append(option.clone());
+                    $('#editSelectTurma').append(option);
                 });
-            } else {
-                $('#selectTurma').append('<option value="">Nenhuma turma cadastrada</option>');
             }
-        }, error: function(){
-            alert('Erro ao carregar as turmas');
         }
     });
 
-
-       //Faz a requisição para listas as turmas em edição
-    $.ajax({
-        url: '../Turma/consultar',
-        method: "POST",
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            codigo: '',
-            descricao: '',
-            capacidade: '',
-            dataInicio: ''
-        }),
-        success: function(retorno){
-            if(retorno.codigo==1){
-                $.each(retorno.dados, function(index, item){
-                    $('#editSelectTurma').append($('<option>', {
-                        value: item.codigo,
-                        text: item.descricao
-                    }));
-                });
-            } else {
-                $('#editSelectTurma').append('<option value="">Nenhuma turma cadastrada</option>');
-            }
-        }, error: function(){
-            alert('Erro ao carregar as turmas');
-        }
-    });
-
-
-    //Faz a requisição para listas os horários
+    // Horários
     $.ajax({
         url: '../Horario/consultar',
         method: "POST",
         dataType: 'json',
         contentType: 'application/json',
-        data: JSON.stringify({
-            codigo: '',
-            descricao: '',
-            horaInicial: '',
-            horaFinal: ''
-        }),
-        success: function(retorno){
-            if(retorno.codigo==1){
-                $.each(retorno.dados, function(index, item){
-                    $('#selectHorario').append($('<option>', {
-                        value: item.codigo,
-                        text: item.descricao
-                    }));
+        data: JSON.stringify({ codigo: '', descricao: '', horaInicial: '', horaFinal: '' }),
+        success: function (retorno) {
+            if (retorno.codigo == 1) {
+                $.each(retorno.dados, function (index, item) {
+                    const option = $('<option>', { value: item.codigo, text: item.descricao });
+                    $('#selectHorario').append(option.clone());
+                    $('#editSelectHorario').append(option);
                 });
-            } else {
-                $('#selectHorario').append('<option value="">Nenhum horario cadastrado</option>');
             }
-        }, error: function(){
-            alert('Erro ao carregar os horarios');
         }
     });
-
-
-    //Faz a requisição para listas os horários em edição
-    $.ajax({
-        url: '../Horario/consultar',
-        method: "POST",
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            codigo: '',
-            descricao: '',
-            horaInicial: '',
-            horaFinal: ''
-        }),
-        success: function(retorno){
-            if(retorno.codigo==1){
-                $.each(retorno.dados, function(index, item){
-                    $('#editSelectHorario').append($('<option>', {
-                        value: item.codigo,
-                        text: item.descricao
-                    }));
-                });
-            } else {
-                $('#editSelectHorario').append('<option value="">Nenhum horario cadastrado</option>');
-            }
-        }, error: function(){
-            alert('Erro ao carregar os horarios');
-        }
-    });
-
-
-
-
 });

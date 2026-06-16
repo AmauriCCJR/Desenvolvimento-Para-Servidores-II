@@ -16,6 +16,10 @@ async function gerarRelatorio() {
         });
 
         const result = await response.json();
+            
+        console.log("Quantidade de registros encontrados:", result.dados.length);
+        console.log("Dados que chegaram do PHP:", result.dados);
+
 
         if (result.codigo == 1) {
             Swal.fire('Sucesso!', result.msg, 'success');

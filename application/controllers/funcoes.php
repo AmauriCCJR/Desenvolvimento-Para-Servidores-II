@@ -36,5 +36,9 @@ public function abrePeriodo(){
 public function abreMapa(){
     $this->load->view('reserva');
 }
+
+public function abreRelatorio(){
+    $this->load->view('relatorio');
+}
 }
 ?>
